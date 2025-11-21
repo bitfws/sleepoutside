@@ -51,7 +51,39 @@ export function renderListWithTemplate(
   const htmlStrings = list.map(templateFn);
   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
 }
+//
 
+
+//////function render added team
+export function renderWithTemplate(template, parentElement, data, callback) {
+  parentElement.insertAdjacentHTML("afterbegin", template);
+  if (callback) {
+    callback(data);
+  }
+}
+///////////////////request template
+export async function loadTemplate(path) {
+  const res = await fetch(path);
+  const template = await res.text();
+  return template;
+}
+
+
+export async function loadHeaderFooter(callback) {
+  const header = document.querySelector("header");
+  const footer = document.querySelector("footer");
+  const headerTemplate = await loadTemplate("../partials/header.html");
+  const footerTemplate = await loadTemplate("../partials/footer.html");
+  renderWithTemplate(headerTemplate, header, "", callback);
+  renderWithTemplate(footerTemplate, footer);
+}
+
+
+
+export function categories() {
+  //////return the categories of products available to use in the search page
+  return ["backpacks", "sleeping-bags", "tents"];
+}
 export function sortBy(products, sortList) {
   const sortFunctions = {
     "Name Asc": (a, b) => a.Name.localeCompare(b.Name),
@@ -65,6 +97,12 @@ export function sortBy(products, sortList) {
   return sortFunction ? products.sort(sortFunction) : products;
 }
 
+
+export function searchingInProducts(products, searchValue) {
+  let searchValueLowerCase = searchValue.toLowerCase();
+  let results = products.filter(product => JSON.stringify(product).toLowerCase().includes(searchValueLowerCase));
+  return results;
+}
 export function updateCartPrice(item) {
   const price = document.querySelector(".cart-footer");
   let totalAmount = 0;
@@ -80,3 +118,19 @@ export function updateCartPrice(item) {
     price.textContent = totalAmount;
   }
 }
+
+export function titleForCategory(category) {
+  switch (category) {
+    case "tents":
+      return "Tents";
+    case "backpacks":
+      return "Backpacks";
+    case "sleeping-bags":
+      return "Sleeping Bags";
+    case "hammocks":
+      return "Hammocks";
+    default:
+      return "";
+  }
+}
+

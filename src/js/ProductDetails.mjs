@@ -1,4 +1,5 @@
 import cartCounter from "./cartCounter.mjs";
+import Reviews from "./reviews";
 import { setLocalStorage, getLocalStorage } from "./utils.mjs";
 
 export default class ProductDetails {
@@ -41,16 +42,28 @@ export default class ProductDetails {
   }
 
   renderProductDetails() {
+    const reviews = new Reviews(this.product.Id);
+    reviews.show();
+
     const template = document.getElementById("product-detail");
     const renderedHTML = document.getElementById("rendered-product-detail");
     const clone = template.content.cloneNode(true);
-    const [brand, name, img, price, color, description, button] =
-      clone.querySelectorAll("h3, h2, img, p, p, p, button");
+    const [
+      brand,
+      name,
+      img,
+      finalPrice,
+      suggestedPrice,
+      color,
+      description,
+      button,
+    ] = clone.querySelectorAll("h3, h2, img, p, p, p, p, button");
 
     brand.textContent = this.product["Brand"]["Name"];
     name.textContent = this.product["NameWithoutBrand"];
     img.setAttribute("src", this.product["Images"]["PrimaryLarge"]);
-    price.textContent = `$ ${this.product["ListPrice"]}`;
+    finalPrice.textContent = `$ ${this.product["FinalPrice"]}`;
+    suggestedPrice.textContent = `$ ${this.product["SuggestedRetailPrice"]}`;
     color.textContent = this.product["Colors"]["ColorName"];
     description.innerHTML = this.product["DescriptionHtmlSimple"];
     button.setAttribute("data-id", this.productId);

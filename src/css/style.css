@@ -191,6 +191,54 @@ button {
   color: var(--dark-grey);
 }
 
+/* reviews section */
+#reviews {
+  width: 80%;
+  margin: auto;
+}
+
+#reviews,
+#reviews-content {
+  margin: 5px auto;
+  text-align: center;
+}
+.review-card {
+  box-shadow: 2px 2px 5px #8b8b8b70;
+  margin: 20px 0;
+  border-radius: 5px;
+  padding: 0 10px;
+}
+
+.review-card,
+#reviews-content span {
+  display: flex;
+  /* justify-content: space-between;*/
+  align-items: center;
+  gap: 2px;
+}
+
+.review-avatar {
+  background-image: url("/images/default-avatar-icon.jpg");
+  background-size: cover;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  z-index: 1;
+}
+
+#reviews-content span button,
+#add-review-btn,
+#save-review-btn {
+  font-size: 0.8rem;
+  border-radius: 10px;
+  background-color: var(--dark-grey);
+}
+
+#review-input {
+  resize: none;
+  margin: 10px auto;
+}
+
 /* Product Card */
 .product-card {
   flex: 1 1 45%;
@@ -223,6 +271,20 @@ button {
 
 .product-detail img {
   width: 100%;
+}
+
+.discounted-product {
+  display: flex;
+}
+
+.product-card__price {
+  font-size: 1.1rem;
+}
+
+.discounted-product .product-card__suggested_price {
+  font-size: 0.8rem;
+  text-decoration: line-through;
+  margin-left: -1rem;
 }
 
 /* Cart list styles */
@@ -295,4 +357,49 @@ footer {
 /* Cart total */
 .cart-footer {
   display: none;
+}
+
+/* Remove and Add ONE item */
+.addOne-item {
+  text-align: right;
+}
+
+.removeOne-item {
+  text-align: right;
+}
+
+.addOne-item:hover {
+  cursor: pointer;
+}
+
+.removeOne-item {
+  cursor: pointer;
+}
+
+header form {
+  align-self: center;
+}
+
+header form input[type="text"] {
+  border-top-left-radius: 1em;
+  border-bottom-left-radius: 1em;
+}
+
+header form input[type="submit"]:hover {
+  background-color: #d0d0d0;
+}
+
+header form input[type="submit"] {
+  border-top-right-radius: 1em;
+  border-bottom-right-radius: 1em;
+}
+
+header form input[type="submit"],
+header form input[type="text"] {
+  padding: 0.4em;
+  padding-left: 0.6em;
+  margin: 0;
+  margin-left: -0.6em;
+  /* border-radius: 1em; */
+  border: 1px solid rgb(1, 1, 1, 0.3);
 }
